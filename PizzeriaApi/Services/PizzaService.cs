@@ -1,18 +1,25 @@
-﻿using Pizzeria_API.DTOs;
-using Pizzeria_DB;
+﻿using PizzeriaApi.DTOs;
+using PizzeriaApi.Utils;
+using PizzeriaDb;
+using PizzeriaDb.Models;
 
-namespace Pizzeria_API.Services;
+namespace PizzeriaApi.Services;
 
 public class PizzaService : IPizzaService
 {
     private readonly PizzeriaContext _pizzeriaContext;
+    private readonly IMapper<PizzaDto, Pizza> _pizzaMapper;
+    private readonly IMapper<IngredientDto, Ingredient> _ingredientMapper;
 
-    public PizzaService(PizzeriaContext pizzeriaContext)
+    public PizzaService(PizzeriaContext pizzeriaContext,
+                        IMapper<PizzaDto, Pizza> pizzaMapper, 
+                        IMapper<IngredientDto, Ingredient> ingredientMapper)
     {
         _pizzeriaContext = pizzeriaContext;
+        _pizzaMapper = pizzaMapper;
+        _ingredientMapper = ingredientMapper;
     }
-
-
+    
     public IEnumerable<PizzaDto> GetAll()
     {
         throw new NotImplementedException();

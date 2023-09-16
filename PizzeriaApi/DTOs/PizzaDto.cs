@@ -1,8 +1,8 @@
-﻿using Pizzeria_DB.Models;
+﻿using PizzeriaDb.Models;
 
-namespace Pizzeria_API.DTOs;
+namespace PizzeriaApi.DTOs;
 
-public class PizzaDto
+public class PizzaDto : IDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }

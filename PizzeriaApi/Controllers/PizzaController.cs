@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pizzeria_API.DTOs;
-using Pizzeria_API.Services;
+using PizzeriaApi.DTOs;
+using PizzeriaApi.Services;
 
-namespace Pizzeria_API.Controllers;
+namespace PizzeriaApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

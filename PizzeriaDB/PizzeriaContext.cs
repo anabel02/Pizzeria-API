@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pizzeria_DB.Models;
+using PizzeriaDb.Models;
 
-namespace Pizzeria_DB;
+namespace PizzeriaDb;
 
 public sealed class PizzeriaContext : DbContext
 {

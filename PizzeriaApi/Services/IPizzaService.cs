@@ -1,6 +1,6 @@
-﻿using Pizzeria_API.DTOs;
+﻿using PizzeriaApi.DTOs;
 
-namespace Pizzeria_API.Services;
+namespace PizzeriaApi.Services;
 
 public interface IPizzaService
 {

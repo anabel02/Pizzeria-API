@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Pizzeria_DB.Models;
+namespace PizzeriaDb.Models;
 
 public class Ingredient : IDbEntity
 {

@@ -1,22 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Pizzeria_DB.Models;
+namespace PizzeriaDb.Models;
 
 public class PizzaIngredient : IDbRelationship
 {
-    public PizzaIngredient()
-    {
-    }
-
-    public PizzaIngredient(int id, Pizza? pizza, Ingredient? ingredient, int units)
-    {
-        Id = id;
-        Pizza = pizza;
-        Ingredient = ingredient;
-        Units = units;
-    }
-
     [Key]
     public int Id { get; set; }
     [NotNull]

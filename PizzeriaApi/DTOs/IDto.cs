@@ -1,4 +1,4 @@
-﻿namespace Pizzeria_API.DTOs;
+﻿namespace PizzeriaApi.DTOs;
 
 public interface IDto
 {

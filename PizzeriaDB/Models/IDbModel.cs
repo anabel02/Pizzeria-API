@@ -1,4 +1,4 @@
-﻿namespace Pizzeria_DB.Models;
+﻿namespace PizzeriaDb.Models;
 
 public interface IDbModel
 {
