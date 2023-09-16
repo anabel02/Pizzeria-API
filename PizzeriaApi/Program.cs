@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using PizzeriaApi.DTOs;
+using PizzeriaApi.Services;
+using PizzeriaApi.Utils;
 using PizzeriaDb;
+using PizzeriaDb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PizzeriaContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("PizzeriaContextSQLite")));
+
+builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IMapper<IngredientDto, Ingredient>, IngredientMapper>();
 
 var app = builder.Build();
 
