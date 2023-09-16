@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Pizzeria_DB;
-using Pizzeria_DB.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

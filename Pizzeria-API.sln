@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 #
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pizzeria-API", "Pizzeria-API\Pizzeria-API.csproj", "{0538FFFE-5075-498D-9238-27DDB62DCCC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaApi", "PizzeriaApi\PizzeriaApi.csproj", "{0538FFFE-5075-498D-9238-27DDB62DCCC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaDB", "PizzeriaDB\PizzeriaDB.csproj", "{68F3EE91-FC7E-41AA-ADCB-D8E8DA611E3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaDb", "PizzeriaDb\PizzeriaDb.csproj", "{68F3EE91-FC7E-41AA-ADCB-D8E8DA611E3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
