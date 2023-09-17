@@ -29,9 +29,9 @@ public class PizzaService : IPizzaService
         var pizza => _pizzaMapper.Map(pizza)
     });
 
-    public async Task<bool> Create(PizzaDto ingredient)
+    public async Task<bool> Create(PizzaDto pizza)
     {
-        await _pizzeriaContext.AddAsync(_pizzaMapper.Map(ingredient));
+        await _pizzeriaContext.AddAsync(_pizzaMapper.Map(pizza));
         return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
