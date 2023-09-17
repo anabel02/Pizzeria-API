@@ -5,8 +5,8 @@ public class PizzaDto : IDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public double Price { get; set; }
+    public decimal Price { get; set; }
     public Size Size { get; set; } = Size.Medium;
 
-    public IEnumerable<(int Id, int units)>? Ingredients { get; set; }
+    public IEnumerable<(int IngredientId, decimal Units)>? Ingredients { get; set; }
 }

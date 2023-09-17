@@ -8,8 +8,8 @@ public class Pizza : IDbEntity
     [Key]
     public int Id { get; set; }
     public string? Name { get; set; }
-    public double Price { get; set; }
+    public decimal Price { get; set; }
     public Size Size { get; set; } = Size.Medium;
     
-    public virtual IEnumerable<PizzaIngredient>? Ingredients { get; set; }
+    public virtual ICollection<PizzaIngredient>? Ingredients { get; set; }
 }

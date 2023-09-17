@@ -11,5 +11,5 @@ public class PizzaIngredient : IDbRelationship
     public virtual Pizza? Pizza { get; set; }
     [NotNull]
     public virtual Ingredient? Ingredient { get; set; }    
-    public int Units { get; set; }
+    public decimal Units { get; set; }
 }
