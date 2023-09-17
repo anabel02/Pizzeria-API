@@ -20,6 +20,9 @@ builder.Services.AddDbContext<PizzeriaContext>(options =>
 builder.Services.AddScoped<IIngredientService, IngredientService>();
 builder.Services.AddScoped<IMapper<IngredientDto, Ingredient>, IngredientMapper>();
 
+builder.Services.AddScoped<IPizzaService, PizzaService>();
+builder.Services.AddScoped<IMapper<PizzaDto, Pizza>, PizzaMapper>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

@@ -1,7 +1,6 @@
-﻿using PizzeriaDb.Models;
+﻿namespace PizzeriaApi.DTOs;
 
-namespace PizzeriaApi.DTOs;
-
+public enum Size {Small, Medium, Large}
 public class PizzaDto : IDto
 {
     public int Id { get; set; }
@@ -9,5 +8,5 @@ public class PizzaDto : IDto
     public double Price { get; set; }
     public Size Size { get; set; } = Size.Medium;
 
-    public IEnumerable<int>? Ingredients { get; set; }
+    public IEnumerable<(int Id, int units)>? Ingredients { get; set; }
 }

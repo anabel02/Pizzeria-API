@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzeriaApi.DTOs;
+using PizzeriaApi.Exceptions;
 using PizzeriaApi.Services;
 
 namespace PizzeriaApi.Controllers;
@@ -9,37 +10,33 @@ namespace PizzeriaApi.Controllers;
 public class PizzaController : ControllerBase
 {
     private readonly IPizzaService _pizzaService;
-    
+
     public PizzaController(IPizzaService pizzaService)
     {
         _pizzaService = pizzaService;
     }
 
-    [HttpGet]
-    [Route("/{id:int}")]
-    public PizzaDto GetById(int id) => _pizzaService.GetById(id);
-    
-    [HttpGet]
-    public IEnumerable<PizzaDto> GetAll() => _pizzaService.GetAll();
-    
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Get(int id)
+    {
+        try
+        {
+            return Ok(await _pizzaService.GetById(id));
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
     [HttpPost]
-    public ActionResult Post(PizzaDto pizza) 
-    {
-        _pizzaService.Create(pizza);
-        return Ok();
-    }
+    public async Task<IActionResult> Post(PizzaDto pizza) =>
+        await _pizzaService.Create(pizza) ? Ok() : BadRequest();
     
-    [HttpPut]
-    public ActionResult Put(PizzaDto pizza) 
-    {
-        _pizzaService.Modify(pizza);
-        return Ok();
-    }
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Put(int id, PizzaDto pizza) => 
+        await _pizzaService.Modify(id, pizza) ? Ok() : BadRequest();
     
-    [HttpDelete]
-    public ActionResult Delete(int id) 
-    {
-        _pizzaService.Delete(id);
-        return Ok();
-    }
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id) => await _pizzaService.Delete(id) ? Ok() : BadRequest();
 }

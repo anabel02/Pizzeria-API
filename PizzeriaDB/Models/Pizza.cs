@@ -11,5 +11,5 @@ public class Pizza : IDbEntity
     public double Price { get; set; }
     public Size Size { get; set; } = Size.Medium;
     
-    public virtual ICollection<PizzaIngredient>? Ingredients { get; set; }
+    public virtual IEnumerable<PizzaIngredient>? Ingredients { get; set; }
 }

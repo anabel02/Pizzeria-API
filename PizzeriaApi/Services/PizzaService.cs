@@ -1,4 +1,5 @@
 ﻿using PizzeriaApi.DTOs;
+using PizzeriaApi.Exceptions;
 using PizzeriaApi.Utils;
 using PizzeriaDb;
 using PizzeriaDb.Models;
@@ -9,39 +10,51 @@ public class PizzaService : IPizzaService
 {
     private readonly PizzeriaContext _pizzeriaContext;
     private readonly IMapper<PizzaDto, Pizza> _pizzaMapper;
-    private readonly IMapper<IngredientDto, Ingredient> _ingredientMapper;
 
     public PizzaService(PizzeriaContext pizzeriaContext,
-                        IMapper<PizzaDto, Pizza> pizzaMapper, 
-                        IMapper<IngredientDto, Ingredient> ingredientMapper)
+                        IMapper<PizzaDto, Pizza> pizzaMapper)
     {
         _pizzeriaContext = pizzeriaContext;
         _pizzaMapper = pizzaMapper;
-        _ingredientMapper = ingredientMapper;
     }
-    
-    public IEnumerable<PizzaDto> GetAll()
+
+    public Task<IEnumerable<PizzaDto>> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public PizzaDto GetById(int id)
+    public Task<PizzaDto> GetById(int id) => Task.FromResult(_pizzeriaContext.Pizzas?.FindAsync(id).Result switch
     {
-        throw new NotImplementedException();
+        null => throw new NotFoundException($"Pizza with id {id} not found"),
+        var pizza => _pizzaMapper.Map(pizza)
+    });
+
+    public async Task<bool> Create(PizzaDto ingredient)
+    {
+        await _pizzeriaContext.AddAsync(_pizzaMapper.Map(ingredient));
+        return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
-    public void Create(PizzaDto pizza)
+    public async Task<bool> Modify(int id, PizzaDto pizza)
     {
-        throw new NotImplementedException();
+        var pizzaDb = _pizzeriaContext.Pizzas?.FindAsync(id).Result ?? _pizzaMapper.Map(pizza);
+        
+        pizzaDb.Name = pizza.Name;
+        pizzaDb.Size = (PizzeriaDb.Models.Size)pizza.Size;
+        pizzaDb.Price = pizza.Price;
+        
+        _pizzeriaContext.Pizzas?.Update(pizzaDb);
+        return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
-    public void Modify(PizzaDto pizza)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(int id)
-    {
-        throw new NotImplementedException();
+        var pizza = _pizzeriaContext.Pizzas?.FindAsync(id).Result;
+        if (pizza is null)
+        {
+            return false;
+        }
+        _pizzeriaContext.Pizzas?.Remove(pizza);
+        return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 } 
