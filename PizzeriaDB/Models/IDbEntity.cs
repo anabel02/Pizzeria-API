@@ -1,6 +1,3 @@
 ﻿namespace PizzeriaDb.Models;
 
-public interface IDbEntity : IDbModel
-{
-    
-}
+public interface IDbEntity : IDbModel { }

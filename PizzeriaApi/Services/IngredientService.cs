@@ -28,15 +28,17 @@ public class IngredientService : IIngredientService
         var ingredient => Task.FromResult(_ingredientMapper.Map(ingredient))
     };
 
-    public async Task<bool> Create(IngredientDto pizza) 
+    public async Task<bool> Create(IngredientDto ingredient) 
     {
-        await _pizzeriaContext.AddAsync(_ingredientMapper.Map(pizza));
+        await _pizzeriaContext.AddAsync(_ingredientMapper.Map(ingredient));
         return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> Modify(IngredientDto pizza) 
+    public async Task<bool> Modify(int id, IngredientDto ingredientDto)
     {
-        _pizzeriaContext.Ingredients?.Update(_ingredientMapper.Map(pizza));
+        var ingredient = _pizzeriaContext.Ingredients?.FindAsync(id).Result ?? _ingredientMapper.Map(ingredientDto);
+        ingredient.Name = ingredientDto.Name;
+        _pizzeriaContext.Ingredients?.Update(ingredient);
         return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
@@ -50,4 +52,7 @@ public class IngredientService : IIngredientService
         _pizzeriaContext.Ingredients?.Remove(ingredient);
         return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
+    
+    public IEnumerable<Ingredient?> GetIngredientsById(IEnumerable<int> ids) => 
+        ids.Select(id => _pizzeriaContext.Ingredients?.FindAsync(id).Result).Where(ingredient => ingredient is not null);
 }

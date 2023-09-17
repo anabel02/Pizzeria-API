@@ -9,8 +9,5 @@ public sealed class PizzeriaContext : DbContext
     public DbSet<Ingredient>? Ingredients { get; set; }
     public DbSet<PizzaIngredient>? PizzaIngredients { get; set; }
 
-    public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options)
-    {
-        Database.EnsureCreated();
-    }
+    public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options) {}
 }
