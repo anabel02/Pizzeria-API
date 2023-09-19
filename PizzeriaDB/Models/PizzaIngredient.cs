@@ -8,8 +8,6 @@ public class PizzaIngredient : IDbRelationship
     [Key]
     public int Id { get; set; }
     [NotNull]
-    public virtual Pizza? Pizza { get; set; }
-    [NotNull]
-    public virtual Ingredient? Ingredient { get; set; }    
-    public decimal Units { get; set; }
+    public virtual Ingredient? Ingredient { get; set; }
+    public double Units { get; set; }
 }

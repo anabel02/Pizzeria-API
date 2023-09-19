@@ -29,6 +29,15 @@ public class PizzaController : ControllerBase
         }
     }
 
+    [HttpGet]
+    public async IAsyncEnumerable<PizzaDto> Get()
+    {
+        await foreach (var pizza in _pizzaService.GetAll())
+        {
+            yield return pizza;
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post(PizzaDto pizza) =>
         await _pizzaService.Create(pizza) ? Ok() : BadRequest();

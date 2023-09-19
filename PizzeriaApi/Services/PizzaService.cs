@@ -18,9 +18,14 @@ public class PizzaService : IPizzaService
         _pizzaMapper = pizzaMapper;
     }
 
-    public Task<IEnumerable<PizzaDto>> GetAll()
+    public async IAsyncEnumerable<PizzaDto> GetAll()
     {
-        throw new NotImplementedException();
+        if (_pizzeriaContext.Pizzas is null) yield break;
+        
+        foreach (var pizza in _pizzeriaContext.Pizzas)
+        {
+            yield return _pizzaMapper.Map(pizza);
+        }
     }
 
     public Task<PizzaDto> GetById(int id) => Task.FromResult(_pizzeriaContext.Pizzas?.FindAsync(id).Result switch
@@ -32,6 +37,7 @@ public class PizzaService : IPizzaService
     public async Task<bool> Create(PizzaDto pizza)
     {
         await _pizzeriaContext.AddAsync(_pizzaMapper.Map(pizza));
+        
         return await _pizzeriaContext.SaveChangesAsync() > 0;
     }
 
