@@ -17,9 +17,15 @@ public class IngredientService : IIngredientService
         _pizzeriaContext = pizzeriaContext;
     }
 
-    public Task<IEnumerable<IngredientDto>> GetAll()
+
+    public async IAsyncEnumerable<IngredientDto> GetAll()
     {
-        throw new NotImplementedException();
+        if (_pizzeriaContext.Ingredients is null) yield break;
+        
+        foreach (var ingredient in _pizzeriaContext.Ingredients)
+        {
+            yield return _ingredientMapper.Map(ingredient);
+        }
     }
 
     public Task<IngredientDto> GetById(int id) => _pizzeriaContext.Ingredients?.FindAsync(id).Result switch

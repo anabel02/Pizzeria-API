@@ -15,6 +15,15 @@ public class IngredientController : ControllerBase
     {
         _ingredientService = ingredientService;
     }
+    
+    [HttpGet]
+    public async IAsyncEnumerable<IngredientDto> Get()
+    {
+        await foreach (var ingredient in _ingredientService.GetAll())
+        {
+            yield return ingredient;
+        }
+    }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get(int id)
